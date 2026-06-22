@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Controle de Parcelas</title>
+    <title>Controle de parcelas</title>
     <link rel="stylesheet" href="./style.css">
 
   </head>
@@ -138,6 +138,7 @@ font-size:16px;
 <th>Valor</th>
 <th>Guilherme</th>
 <th>Giovanna</th>
+<th>Status</th>
 </tr>
 
 </thead>
@@ -188,6 +189,7 @@ let pagoGi=0;
 
 dados.forEach((p,index)=>{
 
+let status="Pendente";
 
 if(p.guilherme) pagoG+=241.50;
 if(p.giovanna) pagoGi+=241.50;
