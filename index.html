@@ -3,8 +3,8 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Calendário 2026</title>
-    
+    <title>Controle de Parcelas</title>
+    <link rel="stylesheet" href="./style.css">
 
   </head>
     
@@ -13,166 +13,272 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Calendário 2026</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Controle de Parcelas</title>
+
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  padding: 10px;
+body{
+font-family:Arial,sans-serif;
+background:#f2f5f9;
+margin:0;
+padding:20px;
 }
-h1 {
-  text-align: center;
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
 }
-select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  font-size: 16px;
+
+h1{
+text-align:center;
+color:#2c3e50;
 }
-.mes {
-  background: #fff;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  padding: 10px;
+
+.info{
+background:#eef6ff;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
 }
-.mes h2 {
-  background: #222;
-  color: #fff;
-  padding: 8px;
-  border-radius: 6px;
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
-.evento {
-  border-bottom: 1px solid #ddd;
-  padding: 8px 0;
+
+th,td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid #ddd;
 }
-.evento:last-child {
-  border-bottom: none;
+
+button{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
 }
-.realizado {
-  text-decoration: line-through;
-  color: green;
+
+.pago{
+background:#2ecc71;
+color:white;
 }
-button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background: #007bff;
-  color: #fff;
+
+.naoPago{
+background:#e74c3c;
+color:white;
 }
-button.ok {
-  background: green;
+
+.concluida{
+background:#d4edda;
+}
+
+.progresso{
+width:100%;
+height:25px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:15px;
+}
+
+#barra{
+height:100%;
+width:0%;
+background:#2ecc71;
+transition:.3s;
+}
+
+.reset{
+margin-top:20px;
+background:#e74c3c;
+color:white;
+width:100%;
+padding:15px;
+font-size:16px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📅 Calendário 2026</h1>
+<div class="container">
 
-<select id="filtro">
-  <option value="Todos">Todos</option>
-  <option value="Caboclos">Caboclos</option>
-  <option value="Pretos Velhos">Pretos Velhos</option>
-  <option value="Exu">Exu / Pomba Gira</option>
-  <option value="Orixás">Orixás</option>
-  <option value="Erês">Erês</option>
-  <option value="Reunião">Reunião</option>
-  <option value="Festa">Festa</option>
-</select>
+<h1>💳 Controle de Parcelas</h1>
 
-<div id="calendario"></div>
+<div class="info">
+
+<h3>Resumo</h3>
+
+<p>Valor da parcela: <b>R$483,00</b></p>
+<p>Guilherme paga: <b>R$241,50</b></p>
+<p>Giovanna paga: <b>R$241,50</b></p>
+
+<p id="resumo"></p>
+
+<div class="progresso">
+<div id="barra"></div>
+</div>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Parcela</th>
+<th>Valor</th>
+<th>Guilherme</th>
+<th>Giovanna</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="tabela"></tbody>
+
+</table>
+
+<button class="reset" onclick="limparTudo()">🗑 Limpar Tudo</button>
+
+</div>
 
 <script>
-const eventos = [
-  {mes:"Janeiro", texto:"17/01 - 18h - Homenagem a Oxóssi", tipo:"Orixás"},
-  {mes:"Janeiro", texto:"31/01 - 18h - Canja de Oxalá", tipo:"Orixás"},
 
-  {mes:"Fevereiro", texto:"13/02 - 20h - Festa de Exu", tipo:"Exu"},
-  {mes:"Fevereiro", texto:"28/02 - 14h - Reunião do Terreiro", tipo:"Reunião"},
+let dados = JSON.parse(localStorage.getItem("parcelas"));
 
-  {mes:"Março", texto:"07/03 - 18h - Marinheiros", tipo:"Festa"},
-  {mes:"Março", texto:"21/03 - 18h - Boiadeiros / Xangô", tipo:"Orixás"},
+if(!dados){
 
-  {mes:"Abril", texto:"02/04 - 20h - Festa de Pomba Gira", tipo:"Exu"},
-  {mes:"Abril", texto:"18/04 - 18h - Ogum", tipo:"Orixás"},
+dados=[];
 
-  {mes:"Maio", texto:"02/05 - 18h - Caboclos e Boiadeiros", tipo:"Caboclos"},
-  {mes:"Maio", texto:"16/05 - 18h - Pretos Velhos e Erês", tipo:"Pretos Velhos"},
-  {mes:"Maio", texto:"30/05 - 18h - Ciganos", tipo:"Festa"},
+for(let i=1;i<=8;i++){
 
-  {mes:"Junho", texto:"14/06 - 06h - Encontro dos Orixás", tipo:"Orixás"},
-  {mes:"Junho", texto:"27/06 - 18h - Exu e Pomba Gira", tipo:"Exu"},
+dados.push({
+guilherme:false,
+giovanna:false
+});
 
-  {mes:"Julho", texto:"Férias", tipo:"Reunião"},
-
-  {mes:"Agosto", texto:"01/08 - 18h - Pretos Velhos", tipo:"Pretos Velhos"},
-  {mes:"Agosto", texto:"15/08 - 18h - Aniversário da União", tipo:"Festa"},
-  {mes:"Agosto", texto:"29/08 - 18h - Exu", tipo:"Exu"},
-
-  {mes:"Setembro", texto:"12/09 - 18h - Caboclos", tipo:"Caboclos"},
-  {mes:"Setembro", texto:"26/09 - 16h - Cosme e Damião", tipo:"Erês"},
-
-  {mes:"Outubro", texto:"03/10 - 18h - Marinheiros", tipo:"Festa"},
-  {mes:"Outubro", texto:"17/10 - 18h - Boiadeiros / Oxum", tipo:"Orixás"},
-
-  {mes:"Novembro", texto:"07/11 - 18h - Baianos", tipo:"Festa"},
-  {mes:"Novembro", texto:"21/11 - 18h - Exu Mirim", tipo:"Exu"},
-
-  {mes:"Dezembro", texto:"06/12 - 04h - Iemanjá e Iansã", tipo:"Orixás"}
-];
-
-const feitos = JSON.parse(localStorage.getItem("feitos")) || {};
-const calendario = document.getElementById("calendario");
-const filtro = document.getElementById("filtro");
-
-function render() {
-  calendario.innerHTML = "";
-  const tipo = filtro.value;
-  const meses = {};
-
-  eventos.forEach((e, i) => {
-    if (tipo !== "Todos" && e.tipo !== tipo) return;
-    if (!meses[e.mes]) meses[e.mes] = [];
-    meses[e.mes].push({ ...e, id: i });
-  });
-
-  for (let mes in meses) {
-    const divMes = document.createElement("div");
-    divMes.className = "mes";
-    divMes.innerHTML = `<h2>${mes}</h2>`;
-
-    meses[mes].forEach(ev => {
-      const div = document.createElement("div");
-      div.className = "evento";
-
-      const txt = document.createElement("div");
-      txt.textContent = ev.texto;
-      if (feitos[ev.id]) txt.classList.add("realizado");
-
-      const btn = document.createElement("button");
-      btn.textContent = feitos[ev.id] ? "✔ Realizado" : "Marcar";
-      if (feitos[ev.id]) btn.classList.add("ok");
-
-      btn.onclick = () => {
-        feitos[ev.id] = !feitos[ev.id];
-        localStorage.setItem("feitos", JSON.stringify(feitos));
-        render();
-      };
-
-      div.appendChild(txt);
-      div.appendChild(btn);
-      divMes.appendChild(div);
-    });
-
-    calendario.appendChild(divMes);
-  }
 }
 
-filtro.onchange = render;
-render();
+}
+
+function salvar(){
+
+localStorage.setItem("parcelas",JSON.stringify(dados));
+
+}
+
+function atualizar(){
+
+const tabela=document.getElementById("tabela");
+
+tabela.innerHTML="";
+
+let concluidas=0;
+
+let pagoG=0;
+let pagoGi=0;
+
+dados.forEach((p,index)=>{
+
+let status="Pendente";
+
+if(p.guilherme) pagoG+=241.50;
+if(p.giovanna) pagoGi+=241.50;
+
+if(p.guilherme && p.giovanna){
+status="✅ Concluída";
+concluidas++;
+}
+
+tabela.innerHTML+=`
+
+<tr class="${status=="✅ Concluída"?"concluida":""}">
+
+<td>${index+1}/8</td>
+
+<td>R$483,00</td>
+
+<td>
+
+<button class="${p.guilherme?"pago":"naoPago"}"
+
+onclick="toggle(${index},'guilherme')">
+
+${p.guilherme?"Pago":"Pendente"}
+
+</button>
+
+</td>
+
+<td>
+
+<button class="${p.giovanna?"pago":"naoPago"}"
+
+onclick="toggle(${index},'giovanna')">
+
+${p.giovanna?"Pago":"Pendente"}
+
+</button>
+
+</td>
+
+<td>${status}</td>
+
+</tr>
+
+`;
+
+});
+
+let restante=(8-concluidas)*483;
+
+document.getElementById("resumo").innerHTML=`
+<b>Parcelas concluídas:</b> ${concluidas}/8<br><br>
+
+<b>Guilherme pagou:</b> R$ ${pagoG.toFixed(2)}<br>
+
+<b>Giovanna pagou:</b> R$ ${pagoGi.toFixed(2)}<br><br>
+
+<b>Falta pagar:</b> R$ ${restante.toFixed(2)}
+`;
+
+document.getElementById("barra").style.width=(concluidas/8*100)+"%";
+
+salvar();
+
+}
+
+function toggle(i,pessoa){
+
+dados[i][pessoa]=!dados[i][pessoa];
+
+atualizar();
+
+}
+
+function limparTudo(){
+
+if(confirm("Deseja apagar todos os pagamentos?")){
+
+localStorage.removeItem("parcelas");
+
+location.reload();
+
+}
+
+}
+
+atualizar();
+
 </script>
 
 </body>
