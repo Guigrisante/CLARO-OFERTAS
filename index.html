@@ -1,154 +1,860 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas Claro</title>
 
-    <link rel="stylesheet" href="style.css">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ofertas Claro Fibra</title>
+
+<style>
+/* ============================
+   RESET
+============================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5f6fa;
+    color:#222;
+    overflow-x:hidden;
+}
+
+/* ============================
+HEADER
+============================ */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:80px;
+    background:#d60000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 8%;
+    z-index:999;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+
+.logo h1{
+    color:white;
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ffd000;
+}
+
+/* ============================
+BANNER
+============================ */
+
+.banner{
+    margin-top:80px;
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:70px 8%;
+    gap:60px;
+    background:linear-gradient(135deg,#d60000,#ff2b2b);
+}
+
+.banner-texto{
+    flex:1;
+    color:white;
+}
+
+.banner-texto h4{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.banner-texto h1{
+    font-size:58px;
+    line-height:65px;
+    margin-bottom:25px;
+    font-weight:800;
+}
+
+.banner-texto p{
+    font-size:20px;
+    margin-bottom:35px;
+    line-height:32px;
+}
+
+.banner-texto button{
+    background:white;
+    color:#d60000;
+    border:none;
+    padding:18px 45px;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.banner-texto button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.banner-imagem{
+    flex:1;
+}
+
+.banner-imagem img{
+    width:100%;
+    height:auto;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+/* ============================
+TÍTULOS
+============================ */
+
+section h2{
+    text-align:center;
+    font-size:42px;
+    margin:70px 0 50px;
+    color:#d60000;
+    font-weight:800;
+}
+
+/* ============================
+CARDS
+============================ */
+
+.cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+    padding:0 8% 60px;
+}
+
+.card{
+    width:320px;
+    background:white;
+    border-radius:20px;
+    padding:28px 24px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    transition:.35s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:380px;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 45px rgba(0,0,0,.20);
+}
+
+.icone{
+    width:85px;
+    height:85px;
+    margin:0 auto 18px auto;
+    border-radius:50%;
+    background:#d60000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:34px;
+}
+
+/* Responsive adjustments */
+@media (max-width:1000px){
+    .cards{gap:20px;padding:0 5% 50px}
+    .card{width:45%;min-height:360px}
+}
+
+@media (max-width:640px){
+    .card{width:100%;min-height:auto}
+}
+
+.card h3{
+    font-size:28px;
+    color:#d60000;
+}
+
+.card p{
+    margin:20px 0;
+    font-size:17px;
+    min-height:55px;
+}
+
+.card h1{
+    font-size:42px;
+    color:#111;
+}
+
+.card span{
+    color:#666;
+}
+
+/* ============================
+BOTÕES
+============================ */
+
+.card button{
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    border:none;
+    border-radius:50px;
+    background:#25D366;
+    color:white;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#1aa84f;
+    transform:scale(1.05);
+}
+
+/* ============================
+OFERTA DIA DOS PAIS
+============================ */
+
+.oferta{
+    background:linear-gradient(135deg,#fff6d5,#ffe27a);
+    padding:80px 0;
+}
+
+.oferta h2{
+    color:#d60000;
+}
+
+.destaque{
+    border:4px solid #ffb800;
+    position:relative;
+    overflow:hidden;
+}
+
+.destaque::before{
+    content:"OFERTA";
+    position:absolute;
+    top:18px;
+    right:-35px;
+    width:140px;
+    padding:8px 0;
+    background:#ffb800;
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    text-align:center;
+    transform:rotate(35deg);
+}
+
+/* ============================
+PRIME VIDEO
+============================ */
+
+.prime{
+    padding:80px 8%;
+}
+
+.prime-box{
+    background:linear-gradient(135deg,#111,#222);
+    color:white;
+    border-radius:25px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.prime-box i{
+    font-size:48px;
+    color:#ffb800;
+    margin-bottom:20px;
+}
+
+.prime-box h2{
+    color:white;
+    margin:0 0 20px;
+}
+
+.prime-box p{
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.prime-box h3{
+    font-size:38px;
+    color:#ffb800;
+    margin:20px 0;
+}
+
+.prime-box button{
+    background:#ffb800;
+    color:#111;
+    border:none;
+    padding:16px 35px;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+/* ============================
+CONTATO
+============================ */
+
+.contato{
+    text-align:center;
+    padding:80px 8% 120px;
+}
+
+.contato p{
+    font-size:20px;
+    margin-bottom:25px;
+}
+
+.contato button{
+    background:#d60000;
+    color:white;
+    border:none;
+    padding:16px 35px;
+    border-radius:50px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ============================
+RODAPE
+============================ */
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:50px 8%;
+}
+
+footer h2{
+    color:white;
+    margin-bottom:15px;
+}
+
+footer p{
+    margin-bottom:10px;
+}
+
+.whatsapp-fixo{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    z-index:9999;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.topo{
+    position:fixed;
+    right:25px;
+    bottom:110px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#d60000;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+    transition:.3s;
+    opacity:0;
+    pointer-events:none;
+    z-index:9999;
+}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
 
 <body>
 
+<!-- BOTÃO WHATSAPP -->
+
+<a class="whatsapp-fixo"
+href="https://wa.me/5511940786729"
+target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- MENU -->
+
 <header>
-    <h1>Confira nossas ofertas</h1>
-    <p>Internet + Celular + Entretenimento</p>
+
+<div class="logo">
+
+    <h1>CLARO</h1>
+
+</div>
+
+<nav>
+
+<a href="#planos">Planos</a>
+
+<a href="#ofertas">Oferta Pais</a>
+
+<a href="#prime">Prime Video</a>
+
+<a href="#contato">Contato</a>
+
+</nav>
+
 </header>
 
+<!-- BANNER -->
 
-<section class="planos">
+<section class="banner">
 
-
-<div class="plano">
-    <h2>600 Mega</h2>
-    <p>Globoplay + Claro Pós 60GB</p>
-    <h3>R$ 159,90/mês</h3>
-
-    <button onclick="whatsapp('600 Mega + Globoplay + Claro Pós de 60GB - R$ 159,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
-<div class="plano">
-    <h2>350 Mega</h2>
-    <p>Globoplay + Claro Controle 41GB</p>
-    <h3>R$ 129,80/mês</h3>
-
-    <button onclick="whatsapp('350 Mega + Globoplay + Claro Controle de 41GB - R$ 129,80/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-<div class="plano">
-    <h2>600 Mega</h2>
-    <p>Globoplay Individual</p>
-    <h3>R$ 99,90/mês</h3>
-
-    <button onclick="whatsapp('600 Mega + Globoplay Individual - R$ 99,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-<div class="plano">
-    <h2>1 Giga</h2>
-    <p>Globoplay Individual + Claro Pós 60GB</p>
-    <h3>R$ 179,80/mês</h3>
-
-    <button onclick="whatsapp('1 Giga + Globoplay Individual + Claro Pós 60GB - R$ 179,80/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-<div class="plano">
-    <h2>500 Mega</h2>
-    <p>60GB + Passaporte América + Globoplay</p>
-    <h3>R$ 129,90/mês</h3>
-
-    <button onclick="whatsapp('500 Mega + 60GB + Passaporte América + Globoplay - R$ 129,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
+    <img src="imagens/ChatGPT%20Image%2029%20de%20jul.%20de%202026,%2020_07_31.png" class="banner-full" alt="Banner">
 
 </section>
 
+<!-- PLANOS -->
 
-<h1 class="titulo-oferta">
-    Oferta Dia dos Pais
+<section id="planos">
+
+<h2>
+
+Confira nossas ofertas
+
+</h2>
+
+<div class="cards">
+
+<!-- CARD -->
+
+<div class="card">
+
+<div class="icone">
+
+<i class="fa-solid fa-wifi"></i>
+
+</div>
+
+
+<h3>600 Mega</h3>
+
+<p>
+
+Globoplay + Claro Pós 60GB
+
+</p>
+
+<h1>
+
+R$159,90
+
 </h1>
 
+<span>/mês</span>
 
-<section class="planos">
+<button onclick="enviarPlano('600 Mega + Globoplay + Claro Pós 60GB')">
 
+Contratar Agora
 
-<div class="plano destaque">
-    <h2>1 GIGA + 100GB</h2>
-    <h3>R$ 179,90/mês</h3>
-
-    <button onclick="whatsapp('Oferta Dia dos Pais - 1 GIGA + 100GB - R$ 179,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-<div class="plano destaque">
-    <h2>500 MEGA + 100GB</h2>
-    <h3>R$ 129,90/mês</h3>
-
-    <button onclick="whatsapp('Oferta Dia dos Pais - 500 MEGA + 100GB - R$ 129,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-<div class="plano destaque">
-    <h2>500 MEGA + 40GB</h2>
-    <h3>R$ 119,90/mês</h3>
-
-    <button onclick="whatsapp('Oferta Dia dos Pais - 500 MEGA + 40GB - R$ 119,90/mês')">
-        Contratar
-    </button>
-</div>
-
-
-
-</section>
-
-
-
-<section class="prime">
-
-<h2>Prime Video</h2>
-
-<p>
-3 meses grátis de Prime Video
-</p>
-
-<p>
-Após os 3 meses: R$ 13,90/mês
-</p>
-
-
-<button onclick="whatsapp('Tenho interesse no Prime Video - 3 meses grátis')">
-Contratar
 </button>
 
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<div class="icone">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+</div>
+
+<h3>350 Mega</h3>
+
+<p>
+
+Globoplay + Claro Controle 41GB
+
+</p>
+
+<h1>
+
+R$129,80
+
+</h1>
+
+<span>/mês</span>
+
+<button onclick="enviarPlano('350 Mega + Globoplay + Claro Controle 41GB')">
+
+Contratar Agora
+
+</button>
+
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<div class="icone">
+
+<i class="fa-solid fa-tv"></i>
+
+</div>
+
+<h3>600 Mega</h3>
+
+<p>
+
+Globoplay Individual
+
+</p>
+
+<h1>
+
+R$99,90
+
+</h1>
+
+<span>/mês</span>
+
+<button onclick="enviarPlano('600 Mega + Globoplay Individual')">
+
+Contratar Agora
+
+</button>
+
+</div>
+
+</div>
+<!-- MAIS PLANOS -->
+
+<div class="cards">
+
+    <!-- CARD -->
+
+    <div class="card">
+
+        <div class="icone">
+            <i class="fa-solid fa-globe"></i>
+        </div>
+
+        <h3>1 Giga</h3>
+
+        <p>
+            Globoplay Individual + Claro Pós 60GB
+        </p>
+
+        <h1>R$179,80</h1>
+
+        <span>/mês</span>
+
+        <button onclick="enviarPlano('1 Giga + Globoplay Individual + Claro Pós 60GB')">
+            Contratar Agora
+        </button>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <div class="icone">
+            <i class="fa-solid fa-earth-americas"></i>
+        </div>
+
+        <h3>500 Mega</h3>
+
+        <p>
+            60GB + Passaporte América + Globoplay
+        </p>
+
+        <h1>R$129,90</h1>
+
+        <span>/mês</span>
+
+        <button onclick="enviarPlano('500 Mega + 60GB + Passaporte América + Globoplay')">
+            Contratar Agora
+        </button>
+
+    </div>
+
+</div>
 
 </section>
+
+
+
+<!-- OFERTA DIA DOS PAIS -->
+
+<section id="ofertas" class="oferta">
+
+<h2>
+
+🔥 Oferta Especial Dia dos Pais 🔥
+
+</h2>
+
+<div class="cards">
+
+<div class="card destaque">
+
+<h3>1 GIGA</h3>
+
+<p>
+
+100 GB
+
+</p>
+
+<h1>
+
+R$179,90
+
+</h1>
+
+<span>/mês</span>
+
+<button onclick="enviarPlano('Oferta Dia dos Pais - 1 GIGA + 100GB')">
+
+Quero esta Oferta
+
+</button>
+
+</div>
+
+
+
+<div class="card destaque">
+
+<h3>500 MEGA</h3>
+
+<p>
+
+100 GB
+
+</p>
+
+<h1>
+
+R$129,90
+
+</h1>
+
+<span>/mês</span>
+
+<button onclick="enviarPlano('Oferta Dia dos Pais - 500 MEGA + 100GB')">
+
+Quero esta Oferta
+
+</button>
+
+</div>
+
+
+
+<div class="card destaque">
+
+<h3>500 MEGA</h3>
+
+<p>
+
+40 GB
+
+</p>
+
+<h1>
+
+R$119,90
+
+</h1>
+
+<span>/mês</span>
+
+<button onclick="enviarPlano('Oferta Dia dos Pais - 500 MEGA + 40GB')">
+
+Quero esta Oferta
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+<!-- PRIME VIDEO -->
+
+<section id="prime" class="prime">
+
+<div class="prime-box">
+
+<i class="fa-brands fa-amazon"></i>
+
+<h2>
+
+Prime Video
+
+</h2>
+
+<p>
+
+Ganhe <strong>3 meses grátis</strong> de Prime Video.
+
+</p>
+
+<p>
+
+Após o período promocional:
+
+</p>
+
+<h3>
+
+R$13,90/mês
+
+</h3>
+
+<button onclick="enviarPlano('Tenho interesse na oferta do Prime Video')">
+
+Quero Aproveitar
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+<!-- CONTATO -->
+
+<section id="contato" class="contato">
+
+<h2>
+
+Fale Conosco
+
+</h2>
+
+<p>
+
+Clique no botão abaixo e fale diretamente comigo pelo WhatsApp.
+
+</p>
+
+<a href="https://wa.me/5511940786729" target="_blank">
+
+<button>
+
+<i class="fab fa-whatsapp"></i>
+
+WhatsApp
+
+</button>
+
+</a>
+
+</section>
+
+
+
+
+<footer>
+
+<h2>
+
+CLARO
+
+</h2>
+
+<p>
+
+Internet • Celular • Streaming
+
+</p>
+
+<p>
+
+© 2026 Todos os direitos reservados.
+
+</p>
+
+</footer>
 
 
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
