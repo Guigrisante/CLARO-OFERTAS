@@ -1,289 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Controle de parcelas</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas Claro</title>
 
-<title>Controle de Parcelas</title>
-
-<style>
-body{
-font-family:Arial,sans-serif;
-background:#f2f5f9;
-margin:0;
-padding:20px;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,.15);
-}
-
-h1{
-text-align:center;
-color:#2c3e50;
-}
-
-.info{
-background:#eef6ff;
-padding:15px;
-border-radius:10px;
-margin-bottom:20px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th,td{
-padding:12px;
-text-align:center;
-border-bottom:1px solid #ddd;
-}
-
-button{
-padding:8px 15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.pago{
-background:#2ecc71;
-color:white;
-}
-
-.naoPago{
-background:#e74c3c;
-color:white;
-}
-
-.concluida{
-background:#d4edda;
-}
-
-.progresso{
-width:100%;
-height:25px;
-background:#ddd;
-border-radius:20px;
-overflow:hidden;
-margin-top:15px;
-}
-
-#barra{
-height:100%;
-width:0%;
-background:#2ecc71;
-transition:.3s;
-}
-
-.reset{
-margin-top:20px;
-background:#e74c3c;
-color:white;
-width:100%;
-padding:15px;
-font-size:16px;
-}
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <h1>Confira nossas ofertas</h1>
+    <p>Internet + Celular + Entretenimento</p>
+</header>
 
-<h1>💳 Controle de Parcelas</h1>
 
-<div class="info">
+<section class="planos">
 
-<h3>Resumo</h3>
 
-<p>Valor da parcela: <b>R$483,00</b></p>
-<p>Guilherme paga: <b>R$241,50</b></p>
-<p>Giovanna paga: <b>R$241,50</b></p>
+<div class="plano">
+    <h2>600 Mega</h2>
+    <p>Globoplay + Claro Pós 60GB</p>
+    <h3>R$ 159,90/mês</h3>
 
-<p id="resumo"></p>
-
-<div class="progresso">
-<div id="barra"></div>
+    <button onclick="whatsapp('600 Mega + Globoplay + Claro Pós de 60GB - R$ 159,90/mês')">
+        Contratar
+    </button>
 </div>
 
+
+<div class="plano">
+    <h2>350 Mega</h2>
+    <p>Globoplay + Claro Controle 41GB</p>
+    <h3>R$ 129,80/mês</h3>
+
+    <button onclick="whatsapp('350 Mega + Globoplay + Claro Controle de 41GB - R$ 129,80/mês')">
+        Contratar
+    </button>
 </div>
 
-<table>
 
-<thead>
 
-<tr>
-<th>Parcela</th>
-<th>Valor</th>
-<th>Guilherme</th>
-<th>Giovanna</th>
-<th>Status</th>
-</tr>
+<div class="plano">
+    <h2>600 Mega</h2>
+    <p>Globoplay Individual</p>
+    <h3>R$ 99,90/mês</h3>
 
-</thead>
-
-<tbody id="tabela"></tbody>
-
-</table>
-
-<button class="reset" onclick="limparTudo()">🗑 Limpar Tudo</button>
-
+    <button onclick="whatsapp('600 Mega + Globoplay Individual - R$ 99,90/mês')">
+        Contratar
+    </button>
 </div>
 
-<script>
 
-let dados = JSON.parse(localStorage.getItem("parcelas"));
 
-if(!dados){
+<div class="plano">
+    <h2>1 Giga</h2>
+    <p>Globoplay Individual + Claro Pós 60GB</p>
+    <h3>R$ 179,80/mês</h3>
 
-dados=[];
+    <button onclick="whatsapp('1 Giga + Globoplay Individual + Claro Pós 60GB - R$ 179,80/mês')">
+        Contratar
+    </button>
+</div>
 
-for(let i=1;i<=8;i++){
 
-dados.push({
-guilherme:false,
-giovanna:false
-});
 
-}
+<div class="plano">
+    <h2>500 Mega</h2>
+    <p>60GB + Passaporte América + Globoplay</p>
+    <h3>R$ 129,90/mês</h3>
 
-}
+    <button onclick="whatsapp('500 Mega + 60GB + Passaporte América + Globoplay - R$ 129,90/mês')">
+        Contratar
+    </button>
+</div>
 
-function salvar(){
 
-localStorage.setItem("parcelas",JSON.stringify(dados));
 
-}
+</section>
 
-function atualizar(){
 
-const tabela=document.getElementById("tabela");
+<h1 class="titulo-oferta">
+    Oferta Dia dos Pais
+</h1>
 
-tabela.innerHTML="";
 
-let concluidas=0;
+<section class="planos">
 
-let pagoG=0;
-let pagoGi=0;
 
-dados.forEach((p,index)=>{
+<div class="plano destaque">
+    <h2>1 GIGA + 100GB</h2>
+    <h3>R$ 179,90/mês</h3>
 
-let status="Pendente";
+    <button onclick="whatsapp('Oferta Dia dos Pais - 1 GIGA + 100GB - R$ 179,90/mês')">
+        Contratar
+    </button>
+</div>
 
-if(p.guilherme) pagoG+=241.50;
-if(p.giovanna) pagoGi+=241.50;
 
-if(p.guilherme && p.giovanna){
-status="✅ Concluída";
-concluidas++;
-}
 
-tabela.innerHTML+=`
+<div class="plano destaque">
+    <h2>500 MEGA + 100GB</h2>
+    <h3>R$ 129,90/mês</h3>
 
-<tr class="${status=="✅ Concluída"?"concluida":""}">
+    <button onclick="whatsapp('Oferta Dia dos Pais - 500 MEGA + 100GB - R$ 129,90/mês')">
+        Contratar
+    </button>
+</div>
 
-<td>${index+1}/8</td>
 
-<td>R$483,00</td>
 
-<td>
+<div class="plano destaque">
+    <h2>500 MEGA + 40GB</h2>
+    <h3>R$ 119,90/mês</h3>
 
-<button class="${p.guilherme?"pago":"naoPago"}"
+    <button onclick="whatsapp('Oferta Dia dos Pais - 500 MEGA + 40GB - R$ 119,90/mês')">
+        Contratar
+    </button>
+</div>
 
-onclick="toggle(${index},'guilherme')">
 
-${p.guilherme?"Pago":"Pendente"}
 
+</section>
+
+
+
+<section class="prime">
+
+<h2>Prime Video</h2>
+
+<p>
+3 meses grátis de Prime Video
+</p>
+
+<p>
+Após os 3 meses: R$ 13,90/mês
+</p>
+
+
+<button onclick="whatsapp('Tenho interesse no Prime Video - 3 meses grátis')">
+Contratar
 </button>
 
-</td>
 
-<td>
+</section>
 
-<button class="${p.giovanna?"pago":"naoPago"}"
 
-onclick="toggle(${index},'giovanna')">
 
-${p.giovanna?"Pago":"Pendente"}
-
-</button>
-
-</td>
-
-<td>${status}</td>
-
-</tr>
-
-`;
-
-});
-
-let restante=(8-concluidas)*483;
-
-document.getElementById("resumo").innerHTML=`
-<b>Parcelas concluídas:</b> ${concluidas}/8<br><br>
-
-<b>Guilherme pagou:</b> R$ ${pagoG.toFixed(2)}<br>
-
-<b>Giovanna pagou:</b> R$ ${pagoGi.toFixed(2)}<br><br>
-
-<b>Falta pagar:</b> R$ ${restante.toFixed(2)}
-`;
-
-document.getElementById("barra").style.width=(concluidas/8*100)+"%";
-
-salvar();
-
-}
-
-function toggle(i,pessoa){
-
-dados[i][pessoa]=!dados[i][pessoa];
-
-atualizar();
-
-}
-
-function limparTudo(){
-
-if(confirm("Deseja apagar todos os pagamentos?")){
-
-localStorage.removeItem("parcelas");
-
-location.reload();
-
-}
-
-}
-
-atualizar();
-
-</script>
+<script src="script.js"></script>
 
 </body>
-</html>
-    
-  </body>
-  
 </html>
